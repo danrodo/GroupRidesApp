@@ -72,61 +72,49 @@ class RideTableViewCell: UITableViewCell {
         let users = RideEventController.shared.userDict
         guard let user = users[userRef.recordID] else { return }
         
+        self.addSubview(self.profileImageView)
+        //
+        DispatchQueue.main.async {
+            self.profileImageView.image = user.photo
+            
+            self.addConstraintsWithFormat(format: "H:|-12-[v0(68)]", views: self.profileImageView)
+            self.addConstraintsWithFormat(format: "V:|-12-[v0(68)]", views: self.profileImageView)
+            
+            self.addConstraint(NSLayoutConstraint(item: self.profileImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        }
+    
         var isAttending = false
         
-        
-        UserController.shared.fetchUsersAttending(rideEvent: rideEvent) { (users, success) in
-            if !success {
-                NSLog("Error fetching users atteding a ride")
-                return
-            }
-            
-            guard let users = users else {
-                return
-            }
-            
-            guard let tempUser = users.filter({ $0.cloudKitRecordID == UserController.shared.currentUser?.cloudKitRecordID }).first else {
-                isAttending = false 
-                DispatchQueue.main.async {
-                    self.setUpContainerView(user: user, date: date.description, location: location, isAttending: isAttending)
-                }
-                return
-            }
-            
-            if tempUser.cloudKitRecordID == UserController.shared.currentUser?.cloudKitRecordID {
-                isAttending = true
-            }
+        guard let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first else {
+            isAttending = false
             DispatchQueue.main.async {
                 self.setUpContainerView(user: user, date: date.description, location: location, isAttending: isAttending)
             }
+            return
         }
-        
-        addSubview(profileImageView)
-
-        profileImageView.image = user.photo
-                
-        addConstraintsWithFormat(format: "H:|-12-[v0(68)]", views: profileImageView)
-        addConstraintsWithFormat(format: "V:|-12-[v0(68)]", views: profileImageView)
-        
-        addConstraint(NSLayoutConstraint(item: profileImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-        
+        isAttending = true
+        DispatchQueue.main.async {
+            self.setUpContainerView(user: user, date: date.description, location: location, isAttending: isAttending)
+        }
     }
     
     private func setUpContainerView(user: User, date: String, location: String, isAttending: Bool) {
         
         let containerView = UIView()
 //        containerView.backgroundColor = UIColor.red
-        addSubview(containerView)
         
-        addConstraintsWithFormat(format: "H:|-90-[v0]|", views: containerView)
-        addConstraintsWithFormat(format: "V:[v0(50)]", views: containerView)
-        
-        addConstraint(NSLayoutConstraint(item: containerView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-        
-        containerView.addSubview(nameLabel)
-        containerView.addSubview(dateLabel)
-        containerView.addSubview(locationLabel)
-        containerView.addSubview(attendingLabel)
+        DispatchQueue.main.async {
+            self.addSubview(containerView)
+            
+            self.addConstraintsWithFormat(format: "H:|-90-[v0]|", views: containerView)
+            self.addConstraintsWithFormat(format: "V:[v0(50)]", views: containerView)
+            
+            self.addConstraint(NSLayoutConstraint(item: containerView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+            
+            containerView.addSubview(self.nameLabel)
+            containerView.addSubview(self.dateLabel)
+            containerView.addSubview(self.locationLabel)
+        }
         
         
         
@@ -143,28 +131,30 @@ class RideTableViewCell: UITableViewCell {
         })
         
         if isAttending == true {
-            containerView.addSubview(isAttendingImageView)
-            
-        
-            containerView.addConstraintsWithFormat(format: "H:|[v0][v1(110)]-12-|", views: nameLabel, dateLabel)
-            containerView.addConstraintsWithFormat(format: "V:|[v0][v1(24)]|", views: nameLabel, locationLabel)
-            
-            containerView.addConstraintsWithFormat(format: "H:|[v0]-8-[v1]-8-[v2(20)]-12-|", views: locationLabel, attendingLabel, isAttendingImageView)
-            
-            containerView.addConstraintsWithFormat(format: "V:|[v0(24)]", views: dateLabel)
-            containerView.addConstraintsWithFormat(format: "V:[v0(20)]|", views: isAttendingImageView)
-            containerView.addConstraintsWithFormat(format: "V:[v0(20)]|", views: attendingLabel)
+            DispatchQueue.main.async {
+                containerView.addSubview(self.isAttendingImageView)
+                containerView.addSubview(self.attendingLabel)
+                
+                containerView.addConstraintsWithFormat(format: "H:|[v0][v1(110)]-12-|", views: self.nameLabel, self.dateLabel)
+                containerView.addConstraintsWithFormat(format: "V:|[v0][v1(24)]|", views: self.nameLabel, self.locationLabel)
+                
+                containerView.addConstraintsWithFormat(format: "H:|[v0]-8-[v1]-8-[v2(20)]-12-|", views: self.locationLabel, self.attendingLabel, self.isAttendingImageView)
+                
+                containerView.addConstraintsWithFormat(format: "V:|[v0(24)]", views: self.dateLabel)
+                containerView.addConstraintsWithFormat(format: "V:[v0(20)]|", views: self.isAttendingImageView)
+                containerView.addConstraintsWithFormat(format: "V:[v0(20)]|", views: self.attendingLabel)
+            }
             
         
         } else {
-            containerView.addConstraintsWithFormat(format: "H:|[v0][v1(110)]-12-|", views: nameLabel, dateLabel)
-            containerView.addConstraintsWithFormat(format: "V:|[v0][v1(24)]|", views: nameLabel, locationLabel)
-            
-            containerView.addConstraintsWithFormat(format: "H:|[v0]-12-|", views: locationLabel)
-            
-            containerView.addConstraintsWithFormat(format: "V:|[v0(24)]", views: dateLabel)
+            DispatchQueue.main.async {
+                containerView.addConstraintsWithFormat(format: "H:|[v0][v1(110)]-12-|", views: self.nameLabel, self.dateLabel)
+                containerView.addConstraintsWithFormat(format: "V:|[v0][v1(24)]|", views: self.nameLabel, self.locationLabel)
+                
+                containerView.addConstraintsWithFormat(format: "H:|[v0]-12-|", views: self.locationLabel)
+                
+                containerView.addConstraintsWithFormat(format: "V:|[v0(24)]", views: self.dateLabel)
+            }
         }
     }
-    
-
 }

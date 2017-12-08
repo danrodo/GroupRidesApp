@@ -67,7 +67,7 @@ class UserController {
             
             let predicate = NSPredicate(format: "appleUserReference == %@", appleUserReference)
             
-            self.cloudKitManager.fetchRecordsWithType(UserKeys.recordTypeKey, predicate: predicate, recordFetchedBlock: nil, completion: { (records, error) in
+            self.cloudKitManager.fetchRecordsWithType(UserKeys.recordTypeKey, predicate: predicate, recordFetchedBlock: nil, completion: { [weak self] (records, error) in
                 if let error = error {
                     completion(false)
                     print(error.localizedDescription)
@@ -77,7 +77,7 @@ class UserController {
                     return
                 }
                 let currentUser = User(cloudKitRecord: currentUserRecord)
-                self.currentUser = currentUser
+                self?.currentUser = currentUser
                 completion(true)
             })
         }

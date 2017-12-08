@@ -37,27 +37,25 @@ class RideEventDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        guard let rideEvent = rideEvent, let user = UserController.shared.currentUser else { return }
+        guard let rideEvent = rideEvent else { return }
         
-        UserController.shared.fetchUsersAttending(rideEvent: rideEvent) { (users, success) in
-            if success {
-                self.attendingUsers = users
-            } else {
-                self.attendingUsers = [User]()
-            }
-            guard let user = self.user else { return }
-            
-            let tempRecordID = users?.filter({ $0.cloudKitRecordID == UserController.shared.currentUser?.cloudKitRecordID  }).first
-            
+        guard let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first else {
             DispatchQueue.main.async {
-                if tempRecordID?.cloudKitRecordID == UserController.shared.currentUser?.cloudKitRecordID {
-                    self.joinRideButton.isEnabled = false
-                    self.joinRideButton.backgroundColor = UIColor.red
-                } else {
-                    // turn on join ride button
-                    self.joinRideButton.isEnabled = true
-                    
-                }
+                // turn on join ride button
+                self.joinRideButton.isEnabled = true
+            }
+            return
+        }
+        DispatchQueue.main.async {
+            self.joinRideButton.isEnabled = false
+            self.joinRideButton.backgroundColor = UIColor.red
+        }
+        
+        UserController.shared.fetchUsersAttending(rideEvent: rideEvent) { [weak self] (users, success) in
+            if success {
+                self?.attendingUsers = users
+            } else {
+                self?.attendingUsers = [User]()
             }
         }
     }

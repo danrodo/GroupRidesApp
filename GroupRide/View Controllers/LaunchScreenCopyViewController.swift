@@ -18,11 +18,6 @@ class LaunchScreenCopyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let myStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = myStoryboard.instantiateViewController(withIdentifier: "InitialViewController")
-        let feedTableViewController = myStoryboard.instantiateViewController(withIdentifier: "FeedTableViewController")
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
         cloudKitManager.checkCloudKitAvailability { (success) in
             if !success {
                 NSLog("iCloud not available on this device")
@@ -31,11 +26,19 @@ class LaunchScreenCopyViewController: UIViewController {
                 UserController.shared.fetchCurrentUser(completion: { (success) in
                     if !success {
                         DispatchQueue.main.async {
+                            let myStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            let initialViewController = myStoryboard.instantiateViewController(withIdentifier: "InitialViewController")
                             appDelegate.window?.rootViewController = initialViewController
                         }
                     } else {
                         RideEventController.shared.refreshData()
                         DispatchQueue.main.async {
+                            let myStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            let feedTableViewController = myStoryboard.instantiateViewController(withIdentifier: "FeedTableViewController")
+
+
                             appDelegate.window?.rootViewController = feedTableViewController
                         }
                     }

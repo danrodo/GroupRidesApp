@@ -14,6 +14,10 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     private let refreshViews = UIRefreshControl()
     
+    let manager = CLLocationManager()
+    let geoCoder = CLGeocoder()
+    var userLocation = ""
+    
     // MARK: - Properties
     
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -26,12 +30,12 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         
         setUpViews()
         
-            }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        getCurrentLocation()
         
-
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -108,7 +112,7 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     func setUpViews() {
         NotificationCenter.default.addObserver(self, selector: #selector(ridesWereSet), name: RideEventKeys.rideEventFeedWasSetNotification, object: nil)
-        
+
         tableView.addSubview(refreshViews)
         
         refreshViews.addTarget(self, action: #selector(refreshRideEvents(_:)), for: .valueChanged)
@@ -122,12 +126,7 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         profilePictureImageView.layer.masksToBounds = true
         
         
-        self.locationLabel.text = self.userLocation
-        
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
+
     }
     
     // MARK: - Private helper funcs
@@ -151,43 +150,51 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         }
     }
     
-    let manager = CLLocationManager()
-    let geoCoder = CLGeocoder()
-    var userLocation = ""
-    var userLatitude: Double? = nil
-    var userLongitude: Double? = nil
+    func getCurrentLocation() {
+        
+        manager.requestWhenInUseAuthorization()
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation = locations[0]
-        manager.startUpdatingLocation()
-
-        geoCoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
-            if error != nil {
-                print("Error in reveseGeocode")
-            }
-            guard let placemarks = placemarks else { return }
-            let placemark = placemarks as [CLPlacemark]
-            if placemark.count > 0 {
-                let placemark = placemarks[0]
-                guard let userLocal = placemark.locality else { return }
-                guard let lat = placemark.location?.coordinate.latitude else { return }
-                guard let lon = placemark.location?.coordinate.longitude else { return }
-                
-//                guard let timeZone = placemark.timeZone else { return }
-                
-                manager.stopUpdatingLocation()
-                
-                self.userLocation = userLocal
-                self.userLatitude = lat
-                self.userLongitude = lon
+        if CLLocationManager.locationServicesEnabled() {
+            manager.delegate = self
+            manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            
+            geoCoder.reverseGeocodeLocation(manager.location!, completionHandler: { (placemarks, error) in
+                if let error = error {
+                    NSLog("error getting geo information from location, \(error.localizedDescription)")
+                    return
+                }
+                guard let placemarks = placemarks else { return }
+                let placemark = placemarks[0] as CLPlacemark
+                guard let userLocality = placemark.locality else { return }
                 
                 DispatchQueue.main.async {
-                    self.locationLabel.text = userLocal
+                    self.userLocation = userLocality
+                    self.locationLabel.text = userLocality
                 }
-                return
-            }
+                
+            })
+            
+//            manager.startUpdatingLocation()
         }
+        
     }
- 
+    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        
+//    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

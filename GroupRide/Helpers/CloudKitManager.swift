@@ -37,13 +37,13 @@ class CloudKitManager {
         
         var queryCompletionBlock: (CKQueryCursor?, Error?) -> Void = { (_, _) in }
         
-        queryCompletionBlock = { (queryCurser: CKQueryCursor?, error: Error?) -> Void in
+        queryCompletionBlock =  { [weak self] (queryCurser: CKQueryCursor?, error: Error?) -> Void in
             if let queryCurser = queryCurser {
                 let continueQueryOperation = CKQueryOperation(cursor: queryCurser)
                 continueQueryOperation.recordFetchedBlock = perRecordBlock
                 continueQueryOperation.queryCompletionBlock = queryCompletionBlock
                 
-                self.publicDatabase.add(continueQueryOperation)
+                self?.publicDatabase.add(continueQueryOperation)
             } else {
                 completion?(fetchedRecords, error)
             }
