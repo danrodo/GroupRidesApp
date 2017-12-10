@@ -16,6 +16,7 @@ class PrivacyPolicyViewController: UIViewController {
         super.viewDidLoad()
 
         policyTextArea.layer.cornerRadius = 10.0
+        policyTextArea.isEditable = false 
         policyTextArea.text = policy
     }
 

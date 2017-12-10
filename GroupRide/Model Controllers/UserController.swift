@@ -78,6 +78,7 @@ class UserController {
                 }
                 let currentUser = User(cloudKitRecord: currentUserRecord)
                 self?.currentUser = currentUser
+                print("Found current User")
                 completion(true)
             })
         }

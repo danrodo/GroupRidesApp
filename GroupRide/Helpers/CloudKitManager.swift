@@ -101,16 +101,29 @@ class CloudKitManager {
         
         CKContainer.default().accountStatus() {
             (accountStatus:CKAccountStatus, error:Error?) -> Void in
-            
+
             switch accountStatus {
             case .available:
                 completion(true)
+                print("iCloud available")
                 return
             default:
                 self.handleCloudKitUnavailable(accountStatus, error: error)
+                print("iCloud not availabel")
                 completion(false)
             }
         }
+        
+//        if let currentToken = FileManager.default.ubiquityIdentityToken {
+//            completion(true)
+//            print("iCloud availabel")
+//            return
+//        }
+//        else {
+//            completion(false)
+//            print("iClound not available")
+//            return
+//        }
     }
     
     

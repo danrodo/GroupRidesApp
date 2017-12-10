@@ -18,11 +18,16 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextArea: UITextView!
     
+    @IBOutlet weak var postRideButton: UIButton!
+    
+    
     @IBOutlet weak var saveButtonToTextAreaConstraint: NSLayoutConstraint!
     
     // MARK: - Actions
     
     @IBAction func postRideButtonTapped(_ sender: Any) {
+        
+        postRideButton.isEnabled = false
         
         guard let location = locationTextField.text, let description = descriptionTextArea.text else { return }
         let date = datePicker.date
@@ -41,8 +46,8 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate {
                 
             }
         } else {
-            // Presetn alert here to tell user not to make a event with the current date or sooner
-            
+            // Present alert here to tell user not to make a event with the current date or sooner
+            postRideButton.isEnabled = true
         }
     }
     
@@ -50,6 +55,9 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        postRideButton.isEnabled = true
+        
         descriptionTextArea.delegate = self
         
         datePicker.minimumDate = Date()
@@ -57,7 +65,7 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate {
         
         locationTextField.text = location
         
-        locationTextField.isEnabled = false 
+        locationTextField.isEnabled = true
         
         // Set up tap gesture to dismiss keyboard
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
@@ -84,6 +92,9 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate {
             textView.text = "Enter description here..."
         }
     }
-
-
 }
+
+
+
+
+

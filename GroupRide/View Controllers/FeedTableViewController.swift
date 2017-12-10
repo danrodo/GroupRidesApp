@@ -28,13 +28,21 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationLabel.text = ""
+        
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        
+        
         setUpViews()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        getCurrentLocation()
+        
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -119,7 +127,6 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         
         firstNameLabel.text = UserController.shared.currentUser?.firstName
         lastNamelabel.text = UserController.shared.currentUser?.lastName
-        locationLabel.text = userLocation
         profilePictureImageView.image = UserController.shared.currentUser?.photo
         
         profilePictureImageView.layer.cornerRadius = 15.0
@@ -150,14 +157,9 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         }
     }
     
-    func getCurrentLocation() {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        manager.requestWhenInUseAuthorization()
-
         if CLLocationManager.locationServicesEnabled() {
-            manager.delegate = self
-            manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            
             geoCoder.reverseGeocodeLocation(manager.location!, completionHandler: { (placemarks, error) in
                 if let error = error {
                     NSLog("error getting geo information from location, \(error.localizedDescription)")
@@ -170,19 +172,12 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
                 DispatchQueue.main.async {
                     self.userLocation = userLocality
                     self.locationLabel.text = userLocality
+                    manager.stopUpdatingLocation()
                 }
                 
             })
-            
-//            manager.startUpdatingLocation()
         }
-        
     }
-    
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        
-//    }
-
 }
 
 

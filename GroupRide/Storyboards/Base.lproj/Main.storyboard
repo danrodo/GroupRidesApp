@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7TT-Cr-9f4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7TT-Cr-9f4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -648,6 +648,7 @@
                         <outlet property="datePicker" destination="nZL-iy-VFn" id="tWy-XX-98v"/>
                         <outlet property="descriptionTextArea" destination="fhw-RO-tIm" id="EUA-ug-B0F"/>
                         <outlet property="locationTextField" destination="AC1-Su-oC8" id="Zsy-cU-dMx"/>
+                        <outlet property="postRideButton" destination="IZh-md-cXA" id="Qrq-yq-yAn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IBU-G5-HMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -825,7 +826,7 @@
     <resources>
         <image name="bike_icon_white" width="74" height="43"/>
         <image name="infoIcon" width="25" height="25"/>
-        <image name="settingsIcon" width="50" height="50"/>
+        <image name="settingsIcon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SHa-hv-dqL"/>

@@ -37,8 +37,6 @@ class LaunchScreenCopyViewController: UIViewController {
                             let myStoryboard = UIStoryboard(name: "Main", bundle: nil)
                             let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             let feedTableViewController = myStoryboard.instantiateViewController(withIdentifier: "FeedTableViewController")
-
-
                             appDelegate.window?.rootViewController = feedTableViewController
                         }
                     }
