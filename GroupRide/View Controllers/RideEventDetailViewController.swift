@@ -39,18 +39,17 @@ class RideEventDetailViewController: UIViewController {
         
         guard let rideEvent = rideEvent else { return }
         
-        guard let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first else {
+        if let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first  {
+            DispatchQueue.main.async {
+                self.joinRideButton.isEnabled = false
+                self.joinRideButton.backgroundColor = UIColor.red
+            }
+        } else {
             DispatchQueue.main.async {
                 // turn on join ride button
                 self.joinRideButton.isEnabled = true
             }
-            return
         }
-        DispatchQueue.main.async {
-            self.joinRideButton.isEnabled = false
-            self.joinRideButton.backgroundColor = UIColor.red
-        }
-        
         UserController.shared.fetchUsersAttending(rideEvent: rideEvent) { [weak self] (users, success) in
             if success {
                 self?.attendingUsers = users
