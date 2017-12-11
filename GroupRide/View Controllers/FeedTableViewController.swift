@@ -114,6 +114,7 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         
         if segue.identifier == "feedToProfileSegue" {
             guard let destinatioinVC = segue.destination as? UserProfileViewController else { return }
+            destinatioinVC.user = UserController.shared.currentUser
             destinatioinVC.location = self.locationLabel.text
         }
     }

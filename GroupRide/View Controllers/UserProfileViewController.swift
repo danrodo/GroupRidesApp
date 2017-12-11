@@ -11,9 +11,12 @@ import MessageUI
 
 class UserProfileViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    var user: User? = UserController.shared.currentUser
+    var user: User? = nil
+    
+    
     var location: String?
     
+    @IBOutlet weak var blockUserButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var profilePictureImageView: UIImageView!
 
@@ -21,13 +24,10 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
     @IBOutlet weak var lastNameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
-    
-    @IBAction func reportUserButtonTapped(_ sender: Any) {
-        let mailComposeViewController = configureMailController()
-        if MFMailComposeViewController.canSendMail() {
-            self.present(mailComposeViewController, animated: true, completion: nil)
-        }
+    @IBAction func blockUserButtonTapped(_ sender: Any) {
+        print("BLOCKING USER \(user?.firstName) \(user?.lastName)")
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,12 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
     func setUpViews() {
         infoButton.layer.cornerRadius = infoButton.layer.frame.height / 2
         infoButton.tintColor = UIColor.black
+        
+        if user?.cloudKitRecordID != UserController.shared.currentUser?.cloudKitRecordID {
+            infoButton.isHidden = true
+        } else {
+            blockUserButton.isHidden = true
+        }
         
         self.firstNameLabel.text = user?.firstName
         self.lastNameLabel.text = user?.lastName

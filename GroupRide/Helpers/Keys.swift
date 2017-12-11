@@ -24,7 +24,7 @@ struct UserKeys {
     // MARK: - Notification
     
     static let currentUserWasSetNotification = Notification.Name("currentUserWasSet")
-    
+    static let attendingUsersWereSetNotification = Notification.Name("attendingUsersWereSet")
     
 }
 
