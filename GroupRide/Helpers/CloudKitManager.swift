@@ -113,17 +113,6 @@ class CloudKitManager {
                 completion(false)
             }
         }
-        
-//        if let currentToken = FileManager.default.ubiquityIdentityToken {
-//            completion(true)
-//            print("iCloud availabel")
-//            return
-//        }
-//        else {
-//            completion(false)
-//            print("iClound not available")
-//            return
-//        }
     }
     
     

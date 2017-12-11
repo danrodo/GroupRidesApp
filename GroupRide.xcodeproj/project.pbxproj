@@ -29,6 +29,12 @@
 		5FBF066F1F9E8C9D0055B53C /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBF066E1F9E8C9D0055B53C /* InitialViewController.swift */; };
 		5FBF06711F9E8CE30055B53C /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBF06701F9E8CE30055B53C /* FeedTableViewController.swift */; };
 		5FBF06731F9E9C7B0055B53C /* LaunchScreenCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBF06721F9E9C7B0055B53C /* LaunchScreenCopyViewController.swift */; };
+		5FE050941FDE0DAE004DF1BD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050931FDE0DAE004DF1BD /* CoreDataStack.swift */; };
+		5FE050971FDE0E66004DF1BD /* GroupRide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050951FDE0E66004DF1BD /* GroupRide.xcdatamodeld */; };
+		5FE0509D1FDE18E7004DF1BD /* BlockedUsers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FE0509C1FDE18E7004DF1BD /* BlockedUsers.storyboard */; };
+		5FE0509F1FDE1970004DF1BD /* BlockedUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0509E1FDE1970004DF1BD /* BlockedUserTableViewController.swift */; };
+		5FE050A11FDE36D6004DF1BD /* BlockedUser+Convienece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050A01FDE36D6004DF1BD /* BlockedUser+Convienece.swift */; };
+		5FE050A31FDE370F004DF1BD /* BlockedUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050A21FDE370F004DF1BD /* BlockedUserController.swift */; };
 		5FF57B201FA0E7E2009AF2C1 /* RideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF57B1F1FA0E7E2009AF2C1 /* RideTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +64,12 @@
 		5FBF066E1F9E8C9D0055B53C /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		5FBF06701F9E8CE30055B53C /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		5FBF06721F9E9C7B0055B53C /* LaunchScreenCopyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenCopyViewController.swift; sourceTree = "<group>"; };
+		5FE050931FDE0DAE004DF1BD /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		5FE050961FDE0E66004DF1BD /* GroupRide.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GroupRide.xcdatamodel; sourceTree = "<group>"; };
+		5FE0509C1FDE18E7004DF1BD /* BlockedUsers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BlockedUsers.storyboard; sourceTree = "<group>"; };
+		5FE0509E1FDE1970004DF1BD /* BlockedUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserTableViewController.swift; sourceTree = "<group>"; };
+		5FE050A01FDE36D6004DF1BD /* BlockedUser+Convienece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockedUser+Convienece.swift"; sourceTree = "<group>"; };
+		5FE050A21FDE370F004DF1BD /* BlockedUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserController.swift; sourceTree = "<group>"; };
 		5FF57B1F1FA0E7E2009AF2C1 /* RideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +131,7 @@
 			children = (
 				5FBF06471F9D5FCD0055B53C /* Main.storyboard */,
 				5FBF064C1F9D5FCD0055B53C /* LaunchScreen.storyboard */,
+				5FE0509C1FDE18E7004DF1BD /* BlockedUsers.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -137,6 +150,8 @@
 			children = (
 				5FBF065F1F9D60400055B53C /* User.swift */,
 				5FBF06611F9D611E0055B53C /* RideEvent.swift */,
+				5FE050951FDE0E66004DF1BD /* GroupRide.xcdatamodeld */,
+				5FE050A01FDE36D6004DF1BD /* BlockedUser+Convienece.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -146,6 +161,7 @@
 			children = (
 				5FBF06661F9E4BF20055B53C /* UserController.swift */,
 				5F13D2571F9FB90A003CCA63 /* RideEventController.swift */,
+				5FE050A21FDE370F004DF1BD /* BlockedUserController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -170,6 +186,7 @@
 				5FBF06701F9E8CE30055B53C /* FeedTableViewController.swift */,
 				5F13D2591F9FD454003CCA63 /* NewRideEventViewController.swift */,
 				5F8582271FA1290500615599 /* RideEventDetailViewController.swift */,
+				5FE0509E1FDE1970004DF1BD /* BlockedUserTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -181,6 +198,7 @@
 				5F1FC3B41FD8F75E0000AE10 /* ExtensionHelpers.swift */,
 				5FBF06641F9D61EE0055B53C /* Keys.swift */,
 				5FBF06681F9E4DAC0055B53C /* CloudKitManager.swift */,
+				5FE050931FDE0DAE004DF1BD /* CoreDataStack.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -252,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FE0509D1FDE18E7004DF1BD /* BlockedUsers.storyboard in Resources */,
 				5FBF064E1F9D5FCD0055B53C /* LaunchScreen.storyboard in Resources */,
 				5FBF064B1F9D5FCD0055B53C /* Assets.xcassets in Resources */,
 				5FBF06491F9D5FCD0055B53C /* Main.storyboard in Resources */,
@@ -266,6 +285,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F8582281FA1290500615599 /* RideEventDetailViewController.swift in Sources */,
+				5FE050A31FDE370F004DF1BD /* BlockedUserController.swift in Sources */,
+				5FE050971FDE0E66004DF1BD /* GroupRide.xcdatamodeld in Sources */,
 				5FBF06601F9D60400055B53C /* User.swift in Sources */,
 				5FBF06651F9D61EE0055B53C /* Keys.swift in Sources */,
 				5FBF06691F9E4DAC0055B53C /* CloudKitManager.swift in Sources */,
@@ -277,11 +298,14 @@
 				5FBF06621F9D611E0055B53C /* RideEvent.swift in Sources */,
 				5F1FC3AD1FD8F7310000AE10 /* AttendingUsersTableViewController.swift in Sources */,
 				5FBF06441F9D5FCD0055B53C /* AppDelegate.swift in Sources */,
+				5FE050A11FDE36D6004DF1BD /* BlockedUser+Convienece.swift in Sources */,
 				5FBF066D1F9E78E70055B53C /* NewUserViewController.swift in Sources */,
 				5F1FC3AF1FD8F73E0000AE10 /* PrivacyPolicyViewController.swift in Sources */,
 				5F13D2581F9FB90A003CCA63 /* RideEventController.swift in Sources */,
+				5FE050941FDE0DAE004DF1BD /* CoreDataStack.swift in Sources */,
 				5FBF06731F9E9C7B0055B53C /* LaunchScreenCopyViewController.swift in Sources */,
 				5FBF066F1F9E8C9D0055B53C /* InitialViewController.swift in Sources */,
+				5FE0509F1FDE1970004DF1BD /* BlockedUserTableViewController.swift in Sources */,
 				5F1FC3B51FD8F75E0000AE10 /* ExtensionHelpers.swift in Sources */,
 				5FF57B201FA0E7E2009AF2C1 /* RideTableViewCell.swift in Sources */,
 			);
@@ -470,6 +494,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5FE050951FDE0E66004DF1BD /* GroupRide.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5FE050961FDE0E66004DF1BD /* GroupRide.xcdatamodel */,
+			);
+			currentVersion = 5FE050961FDE0E66004DF1BD /* GroupRide.xcdatamodel */;
+			path = GroupRide.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5FBF06381F9D5FCD0055B53C /* Project object */;
 }

@@ -81,7 +81,7 @@ class NewUserViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
-        let _ = UserController.shared.createUser(firstName: firstName, lastName: lastName, photoData: photoData, attendingRides: [CKReference]()) { (success) in
+        UserController.shared.createUser(firstName: firstName, lastName: lastName, photoData: photoData, attendingRides: [CKReference]()) { (success) in
             DispatchQueue.main.async {
                 if !success {
                     self.blockActionView.isHidden = true

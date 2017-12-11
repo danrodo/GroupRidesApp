@@ -19,12 +19,13 @@ struct UserKeys {
     static let appleUserRefKey = "appleUserReference"
     static let recordTypeKey = "User"
     static let assetKey = "asset"
-    static let attendingRidesKey = "attendingRides" 
+    static let attendingRidesKey = "attendingRides"
+    static let recordIDStringKey = "recordIDString"
     
     // MARK: - Notification
     
     static let currentUserWasSetNotification = Notification.Name("currentUserWasSet")
-    
+    static let attendingUsersWereSetNotification = Notification.Name("attendingUsersWereSet")
     
 }
 

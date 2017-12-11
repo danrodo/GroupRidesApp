@@ -18,6 +18,9 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
     let geoCoder = CLGeocoder()
     var userLocation = ""
     
+    var rideList: [RideEvent]?
+    
+    
     // MARK: - Properties
     
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -35,9 +38,7 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-        
         setUpViews()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,8 +48,6 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
-
     }
 
     // MARK: - Table view data source
@@ -58,27 +57,21 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let rides = RideEventController.shared.rideList else { return 0 }
-        let currentDate = Date()
-        let filteredRides = rides.filter({$0.date > currentDate})
-        return filteredRides.count
+        let count = filterRides()
+        return count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "rideCell", for: indexPath) as? RideTableViewCell else { return RideTableViewCell() }
 
-        guard let rides = RideEventController.shared.rideList else { return RideTableViewCell() }
-        
-        let currentDate = Date()
-        
-        let filteredRides = rides.filter({$0.date > currentDate})
-        
-        let ride = filteredRides[indexPath.row]
+        guard let rideList = rideList else { return RideTableViewCell() }
+        let ride = rideList[indexPath.row]
         
         cell.rideEvent = ride
-
+        
         return cell
+        
     }
 
     // MARK: - Navigation
@@ -114,6 +107,7 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         
         if segue.identifier == "feedToProfileSegue" {
             guard let destinatioinVC = segue.destination as? UserProfileViewController else { return }
+            destinatioinVC.user = UserController.shared.currentUser
             destinatioinVC.location = self.locationLabel.text
         }
     }
@@ -131,9 +125,34 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         
         profilePictureImageView.layer.cornerRadius = 15.0
         profilePictureImageView.layer.masksToBounds = true
-        
-        
 
+    }
+    
+    func filterRides() -> Int {
+        
+        guard let rides = RideEventController.shared.rideList else { return 0 }
+        
+        let currentDate = Date()
+        
+        let blockedUsers = BlockedUserController.shared.fetchBlockedUsers()
+        
+        let upToDateRides = rides.filter({$0.date > currentDate})
+        var filteredRides: [RideEvent] = []
+        
+        if blockedUsers.count == 0 {
+            filteredRides = upToDateRides
+        } else {
+            for rideEvent in upToDateRides {
+                for user in blockedUsers {
+                    if rideEvent.userRef.recordID.recordName != user.userRecordIDString {
+                        filteredRides.append(rideEvent)
+                    }
+                }
+            }
+        }
+        
+        self.rideList = filteredRides
+        return filteredRides.count
     }
     
     // MARK: - Private helper funcs

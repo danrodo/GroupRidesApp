@@ -12,13 +12,30 @@ class AttendingUsersTableViewController: UITableViewController {
     
     var users: [User]? = [] {
         didSet{
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
+    
+    var rideEvent: RideEvent? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        guard let rideEvent = rideEvent else { return }
+        UserController.shared.fetchUsersAttending(rideEvent: rideEvent) { [weak self] (users, success) in
+            if success {
+                self?.users = users
+            } else {
+                NSLog("Error fetching users attending this event")
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        self.users = nil
     }
 
 
@@ -44,8 +61,4 @@ class AttendingUsersTableViewController: UITableViewController {
 
         return cell
     }
-
-
-
-
 }

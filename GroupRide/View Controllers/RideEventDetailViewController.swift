@@ -13,10 +13,7 @@ class RideEventDetailViewController: UIViewController {
     var rideEvent: RideEvent?
     var user: User?
     
-    var attendingUsers: [User]?
-    
     // MARK: - Properties
-    
     
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -26,7 +23,7 @@ class RideEventDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var joinRideButton: UIButton!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,37 +31,13 @@ class RideEventDetailViewController: UIViewController {
         updateViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        guard let rideEvent = rideEvent else { return }
-        
-        guard let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first else {
-            DispatchQueue.main.async {
-                // turn on join ride button
-                self.joinRideButton.isEnabled = true
-            }
-            return
-        }
-        DispatchQueue.main.async {
-            self.joinRideButton.isEnabled = false
-            self.joinRideButton.backgroundColor = UIColor.red
-        }
-        
-        UserController.shared.fetchUsersAttending(rideEvent: rideEvent) { [weak self] (users, success) in
-            if success {
-                self?.attendingUsers = users
-            } else {
-                self?.attendingUsers = [User]()
-            }
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-    }
-    
     // MARK: - Actions
+    
+    @IBAction func userProfileButtonTapped(_ sender: Any) {
+        
+        self.performSegue(withIdentifier: "rideEventDetailToUserProfile", sender: self)
+        
+    }
     
     @IBAction func joinRideButtonTapped(_ sender: Any) {
         
@@ -87,8 +60,15 @@ class RideEventDetailViewController: UIViewController {
         
         if segue.identifier == "attendingUsersSegue" {
             
-            guard let users = attendingUsers, let destinationVC = segue.destination as? AttendingUsersTableViewController else { return }
-            destinationVC.users = users
+            guard let destinationVC = segue.destination as? AttendingUsersTableViewController else { return }
+            destinationVC.rideEvent = self.rideEvent
+        }
+        
+        if segue.identifier == "rideEventDetailToUserProfile" {
+            
+            guard let user = user, let destinationVC = segue.destination as? UserProfileViewController else { return }
+            destinationVC.user = user
+            
         }
     }
     
@@ -97,6 +77,18 @@ class RideEventDetailViewController: UIViewController {
     func updateViews() {
         
         guard let rideEvent = rideEvent else { return }
+        
+        if let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first  {
+            DispatchQueue.main.async {
+                self.joinRideButton.isEnabled = false
+                self.joinRideButton.backgroundColor = UIColor.red
+            }
+        } else {
+            DispatchQueue.main.async {
+                // turn on join ride button
+                self.joinRideButton.isEnabled = true
+            }
+        }
         
         let userRef = rideEvent.userRef
         let users = RideEventController.shared.userDict

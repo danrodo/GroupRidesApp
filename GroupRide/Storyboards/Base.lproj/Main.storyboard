@@ -280,9 +280,16 @@
                                     <action selector="joinRideButtonTapped:" destination="kxA-Pf-8ms" eventType="touchUpInside" id="qZZ-Fy-VJr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXD-GR-qRg">
+                                <rect key="frame" x="16" y="104" width="250" height="110"/>
+                                <connections>
+                                    <action selector="userProfileButtonTapped:" destination="kxA-Pf-8ms" eventType="touchUpInside" id="9Si-P5-eQv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0045209177770000001" green="0.56525456910000005" blue="0.0043908683580000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="qXD-GR-qRg" firstAttribute="trailing" secondItem="Bvu-ek-oK6" secondAttribute="trailing" id="0hj-OH-MdH"/>
                             <constraint firstItem="Ftg-O6-S7H" firstAttribute="top" secondItem="RdP-e6-AlM" secondAttribute="bottom" constant="30" id="4zO-qJ-bQl"/>
                             <constraint firstItem="l2i-61-Vl2" firstAttribute="trailing" secondItem="zYw-Wu-hl6" secondAttribute="trailing" constant="16" id="5tJ-3j-1m5"/>
                             <constraint firstItem="ztE-XH-J2I" firstAttribute="leading" secondItem="l2i-61-Vl2" secondAttribute="leading" constant="16" id="7HX-gX-3go"/>
@@ -290,6 +297,7 @@
                             <constraint firstItem="Bvu-ek-oK6" firstAttribute="leading" secondItem="ztE-XH-J2I" secondAttribute="trailing" constant="8" id="CNi-Kh-ooM"/>
                             <constraint firstItem="6xq-fR-qvh" firstAttribute="leading" secondItem="l2i-61-Vl2" secondAttribute="leading" constant="16" id="FqO-x1-mIE"/>
                             <constraint firstItem="Qvv-VT-irt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yM5-l6-B5T" secondAttribute="leading" constant="20" symbolic="YES" id="G9P-Ac-9Sa"/>
+                            <constraint firstItem="qXD-GR-qRg" firstAttribute="leading" secondItem="ztE-XH-J2I" secondAttribute="leading" id="Hoy-hw-IdX"/>
                             <constraint firstItem="zYw-Wu-hl6" firstAttribute="leading" secondItem="l2i-61-Vl2" secondAttribute="leading" constant="16" id="Hz1-Ww-f3M"/>
                             <constraint firstItem="sMk-2Z-MsO" firstAttribute="width" secondItem="Bvu-ek-oK6" secondAttribute="width" id="IHS-sm-9o0"/>
                             <constraint firstItem="6xq-fR-qvh" firstAttribute="top" secondItem="Ftg-O6-S7H" secondAttribute="bottom" constant="8" id="Jex-I6-uHk"/>
@@ -300,6 +308,7 @@
                             <constraint firstItem="l2i-61-Vl2" firstAttribute="bottom" secondItem="6xq-fR-qvh" secondAttribute="bottom" constant="20" id="UiV-2m-UgO"/>
                             <constraint firstItem="l2i-61-Vl2" firstAttribute="trailing" secondItem="rXx-Uz-tKD" secondAttribute="trailing" constant="8" id="Vt8-Qa-j5C"/>
                             <constraint firstItem="l2i-61-Vl2" firstAttribute="trailing" secondItem="RdP-e6-AlM" secondAttribute="trailing" constant="16" id="WeX-HV-xlK"/>
+                            <constraint firstItem="qXD-GR-qRg" firstAttribute="bottom" secondItem="ztE-XH-J2I" secondAttribute="bottom" id="YSU-g0-HXH"/>
                             <constraint firstAttribute="trailing" secondItem="sMk-2Z-MsO" secondAttribute="trailing" constant="109" id="btf-0u-Awp"/>
                             <constraint firstItem="Ftg-O6-S7H" firstAttribute="width" secondItem="RdP-e6-AlM" secondAttribute="width" id="dx5-gr-bL4"/>
                             <constraint firstItem="rXx-Uz-tKD" firstAttribute="top" secondItem="l2i-61-Vl2" secondAttribute="top" constant="40" id="enp-Jx-7ts"/>
@@ -310,6 +319,7 @@
                             <constraint firstItem="sMk-2Z-MsO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ztE-XH-J2I" secondAttribute="trailing" constant="8" symbolic="YES" id="vaU-X5-hEP"/>
                             <constraint firstItem="Ftg-O6-S7H" firstAttribute="centerX" secondItem="l2i-61-Vl2" secondAttribute="centerX" id="vaz-nK-st6"/>
                             <constraint firstItem="RdP-e6-AlM" firstAttribute="leading" secondItem="l2i-61-Vl2" secondAttribute="leading" constant="16" id="xgW-vP-Woo"/>
+                            <constraint firstItem="qXD-GR-qRg" firstAttribute="top" secondItem="ztE-XH-J2I" secondAttribute="top" id="zuW-Vi-xgz"/>
                             <constraint firstItem="sMk-2Z-MsO" firstAttribute="top" secondItem="Bvu-ek-oK6" secondAttribute="bottom" constant="8" id="zyV-72-oEL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l2i-61-Vl2"/>
@@ -322,6 +332,7 @@
                         <outlet property="lastNameLabel" destination="sMk-2Z-MsO" id="SZn-ev-FeM"/>
                         <outlet property="locationLabel" destination="zYw-Wu-hl6" id="JGC-PS-hez"/>
                         <outlet property="profilePictureImageView" destination="ztE-XH-J2I" id="1Zx-zq-udz"/>
+                        <segue destination="smP-10-4mz" kind="show" identifier="rideEventDetailToUserProfile" id="54M-H3-4Zj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cvH-tS-AWb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -381,17 +392,28 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="MJg-xy-AGj" secondAttribute="height" multiplier="5:1" id="Z2b-l0-itN"/>
                                 </constraints>
-                                <state key="normal" title="Report User">
+                                <state key="normal" title="Block User">
                                     <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="reportUserButtonTapped:" destination="smP-10-4mz" eventType="touchUpInside" id="YEQ-7M-SNQ"/>
+                                    <action selector="blockUserButtonTapped:" destination="smP-10-4mz" eventType="touchUpInside" id="xiY-XF-c4X"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMy-MC-7NT">
+                                <rect key="frame" x="16" y="232" width="150" height="30"/>
+                                <color key="backgroundColor" red="0.83266576780000001" green="0.0001600818563" blue="0.35480702079999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Blocked Users">
+                                    <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="82c-Da-Lhd" kind="show" id="Npi-Vq-cE6"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0024882087019999998" green="0.56642240290000001" blue="0.0026179158590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="MJg-xy-AGj" firstAttribute="top" secondItem="4Hg-xB-erl" secondAttribute="bottom" constant="32" id="1Ha-k8-y4R"/>
+                            <constraint firstItem="YMy-MC-7NT" firstAttribute="top" secondItem="MJg-xy-AGj" secondAttribute="top" id="4gH-yO-yfV"/>
                             <constraint firstItem="iQK-cd-lkw" firstAttribute="trailing" secondItem="TmY-5r-w1P" secondAttribute="trailingMargin" id="FGI-OL-Kbo"/>
                             <constraint firstItem="iQK-cd-lkw" firstAttribute="top" secondItem="4Hg-xB-erl" secondAttribute="top" multiplier="1.15" id="KvY-IS-GWe"/>
                             <constraint firstItem="4Hg-xB-erl" firstAttribute="leading" secondItem="e3s-p1-b6n" secondAttribute="leading" constant="16" id="Oz6-w5-RdT"/>
@@ -400,8 +422,11 @@
                             <constraint firstItem="TOG-gA-ema" firstAttribute="leading" secondItem="4Hg-xB-erl" secondAttribute="trailing" constant="8" id="YeR-Sp-2ea"/>
                             <constraint firstItem="jgC-Uq-ejL" firstAttribute="top" secondItem="TOG-gA-ema" secondAttribute="bottom" constant="8" id="Zv9-hc-QZl"/>
                             <constraint firstItem="4Hg-xB-erl" firstAttribute="top" secondItem="e3s-p1-b6n" secondAttribute="top" constant="16" id="eKl-OB-ZHV"/>
+                            <constraint firstItem="YMy-MC-7NT" firstAttribute="bottom" secondItem="MJg-xy-AGj" secondAttribute="bottom" id="eSy-H8-PNI"/>
+                            <constraint firstItem="YMy-MC-7NT" firstAttribute="trailing" secondItem="MJg-xy-AGj" secondAttribute="trailing" id="f4U-Rr-X0k"/>
                             <constraint firstItem="djs-F8-p0S" firstAttribute="leading" secondItem="4Hg-xB-erl" secondAttribute="trailing" constant="8" id="jld-jS-YF4"/>
                             <constraint firstItem="MJg-xy-AGj" firstAttribute="leading" secondItem="4Hg-xB-erl" secondAttribute="leading" id="mSQ-Gi-7Pv"/>
+                            <constraint firstItem="YMy-MC-7NT" firstAttribute="leading" secondItem="MJg-xy-AGj" secondAttribute="leading" id="mxu-LY-hrB"/>
                             <constraint firstItem="TOG-gA-ema" firstAttribute="top" secondItem="4Hg-xB-erl" secondAttribute="top" multiplier="1.15" id="srQ-YO-206"/>
                             <constraint firstItem="MJg-xy-AGj" firstAttribute="width" secondItem="4Hg-xB-erl" secondAttribute="width" id="tHV-Km-84V"/>
                             <constraint firstItem="djs-F8-p0S" firstAttribute="top" secondItem="jgC-Uq-ejL" secondAttribute="bottom" constant="8" id="wCh-fj-yiO"/>
@@ -410,6 +435,8 @@
                         <viewLayoutGuide key="safeArea" id="e3s-p1-b6n"/>
                     </view>
                     <connections>
+                        <outlet property="blockUserButton" destination="MJg-xy-AGj" id="k0m-09-m5q"/>
+                        <outlet property="blockedUsersButton" destination="YMy-MC-7NT" id="toh-AU-e80"/>
                         <outlet property="firstNameLabel" destination="TOG-gA-ema" id="VQ8-sp-ZFE"/>
                         <outlet property="infoButton" destination="iQK-cd-lkw" id="VMo-LG-Npe"/>
                         <outlet property="lastNameLabel" destination="jgC-Uq-ejL" id="alO-fw-frv"/>
@@ -452,6 +479,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nuY-2y-WAv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="701.60000000000002" y="-3131.7841079460272"/>
+        </scene>
+        <!--BlockedUsers-->
+        <scene sceneID="i9X-e0-OMe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="BlockedUsers" id="82c-Da-Lhd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lg2-Wl-psJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1663" y="-2988"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="mej-lV-Xk9">
@@ -829,6 +864,6 @@
         <image name="settingsIcon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SHa-hv-dqL"/>
+        <segue reference="54M-H3-4Zj"/>
     </inferredMetricsTieBreakers>
 </document>
