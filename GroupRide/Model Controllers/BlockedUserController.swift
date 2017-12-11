@@ -35,14 +35,15 @@ class BlockedUserController {
         
     }
     
-    func attendRideEvent(userRecordIDString: String) {
+    func blockUser(userRecordIDString: String) {
         
         let _ = BlockedUser(userRecordIDString: userRecordIDString, context: CoreDataStack.context)
         
         saveToPersistentStore()
+        
     }
     
-    func leaveRideEvent(blockedUser: BlockedUser) {
+    func unBlockUser(blockedUser: BlockedUser) {
         
         let moc = blockedUser.managedObjectContext
         moc?.delete(blockedUser)
@@ -59,6 +60,15 @@ class BlockedUserController {
         }
     }
     
+    func fetchBlockedUsers() -> [BlockedUser] {
+        let request: NSFetchRequest<BlockedUser> = BlockedUser.fetchRequest()
+        do {
+            return try CoreDataStack.context.fetch(request)
+        } catch let error {
+            print("Error loading from persistent store \(error)")
+        }
+        return []
+    }
 }
 
 

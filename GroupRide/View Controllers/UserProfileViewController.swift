@@ -16,6 +16,7 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
     
     var location: String?
     
+    @IBOutlet weak var blockedUsersButton: UIButton!
     @IBOutlet weak var blockUserButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var profilePictureImageView: UIImageView!
@@ -25,7 +26,11 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
     @IBOutlet weak var locationLabel: UILabel!
     
     @IBAction func blockUserButtonTapped(_ sender: Any) {
-        print("BLOCKING USER \(user?.firstName) \(user?.lastName)")
+        blockUserButton.isEnabled = false
+        guard let user = user else { return }
+        print("BLOCKING USER \(user.firstName) \(user.lastName)")
+        BlockedUserController.shared.blockUser(userRecordIDString: user.recordIDString)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     
@@ -40,8 +45,11 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
         infoButton.tintColor = UIColor.black
         
         if user?.cloudKitRecordID != UserController.shared.currentUser?.cloudKitRecordID {
+            // Not current user
             infoButton.isHidden = true
+            blockedUsersButton.isHidden = true
         } else {
+            //current user 
             blockUserButton.isHidden = true
         }
         

@@ -14,16 +14,18 @@ class BlockedUserTableViewController: UITableViewController, NSFetchedResultsCon
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        BlockedUserController.shared.fetchedResultsController.delegate = self
-        
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+//        BlockedUserController.shared.fetchedResultsController.delegate = self
+//        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        BlockedUserController.shared.fetchedResultsController.delegate = self
         tableView.reloadData()
+        
+        try? BlockedUserController.shared.fetchedResultsController.performFetch()
+        BlockedUserController.shared.fetchedResultsController.delegate = self
+        try? BlockedUserController.shared.fetchedResultsController.performFetch()
     }
 
     // MARK: - Table view data source
@@ -46,15 +48,6 @@ class BlockedUserTableViewController: UITableViewController, NSFetchedResultsCon
 
         return cell
     }
- 
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
     /*
     // Override to support editing the table view.
@@ -65,21 +58,6 @@ class BlockedUserTableViewController: UITableViewController, NSFetchedResultsCon
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
     }
     */
 
@@ -102,7 +80,6 @@ class BlockedUserTableViewController: UITableViewController, NSFetchedResultsCon
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-    
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange anObject: Any,
@@ -135,7 +112,6 @@ class BlockedUserTableViewController: UITableViewController, NSFetchedResultsCon
                     atSectionIndex sectionIndex: Int,
                     for type: NSFetchedResultsChangeType) {
         
-        
         switch type {
         case .delete:
             tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
@@ -145,5 +121,4 @@ class BlockedUserTableViewController: UITableViewController, NSFetchedResultsCon
             break
         }
     }
-
 }

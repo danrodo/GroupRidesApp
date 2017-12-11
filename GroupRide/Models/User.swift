@@ -21,6 +21,7 @@ struct User {
     var photoData: Data?
     
     var cloudKitRecordID: CKRecordID?
+    var recordIDString: String
     var appleUserReference: CKReference
     
     var photo: UIImage? {
@@ -41,12 +42,14 @@ struct User {
         return fileURL
     }
     
-    init(firstName: String, lastName: String, appleUserRef: CKReference, photoData: Data?, attendingRides: [CKReference]) {
+    init(firstName: String, lastName: String, appleUserRef: CKReference, photoData: Data?, attendingRides: [CKReference], recordIDString: String = UUID().uuidString) {
         self.firstName = firstName
         self.lastName = lastName
         self.photoData = photoData
         self.appleUserReference = appleUserRef
         self.attendingRides = attendingRides
+        
+        self.recordIDString = recordIDString
     }
 }
 
@@ -59,7 +62,8 @@ extension User {
         guard let firstName = cloudKitRecord[UserKeys.firstNameKey] as? String,
             let lastName = cloudKitRecord[UserKeys.lastNameKey] as? String,
             let asset = cloudKitRecord[UserKeys.assetKey] as? CKAsset,
-            let appleUserRef = cloudKitRecord[UserKeys.appleUserRefKey] as? CKReference else { return nil }
+            let appleUserRef = cloudKitRecord[UserKeys.appleUserRefKey] as? CKReference,
+            let recordIDString = cloudKitRecord[UserKeys.recordIDStringKey] as? String else { return nil }
         
         let photoData = try? Data(contentsOf: asset.fileURL)
         
@@ -69,6 +73,7 @@ extension User {
         self.appleUserReference = appleUserRef
         self.cloudKitRecordID = cloudKitRecord.recordID
         self.attendingRides = cloudKitRecord[UserKeys.attendingRidesKey] as? [CKReference] ?? []
+        self.recordIDString = recordIDString
     }
 }
 
@@ -78,7 +83,7 @@ extension CKRecord {
     
     convenience init(user: User) {
         
-        let recordID = user.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
+        let recordID = user.cloudKitRecordID ?? CKRecordID(recordName: user.recordIDString)
         self.init(recordType: UserKeys.recordTypeKey, recordID: recordID)
         
         let asset = CKAsset(fileURL: user.temporaryPhotoURL)
@@ -87,6 +92,7 @@ extension CKRecord {
         self.setValue(user.lastName, forKey: UserKeys.lastNameKey)
         self.setValue(asset, forKey: UserKeys.assetKey)
         self.setValue(user.appleUserReference, forKey: UserKeys.appleUserRefKey)
+        self.setValue(user.recordIDString, forKey: UserKeys.recordIDStringKey)
         
         if user.attendingRides.count > 0 {
             self.setValue(user.attendingRides, forKey: UserKeys.attendingRidesKey)
