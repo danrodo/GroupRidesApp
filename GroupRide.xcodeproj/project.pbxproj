@@ -35,6 +35,7 @@
 		5FE0509F1FDE1970004DF1BD /* BlockedUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0509E1FDE1970004DF1BD /* BlockedUserTableViewController.swift */; };
 		5FE050A11FDE36D6004DF1BD /* BlockedUser+Convienece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050A01FDE36D6004DF1BD /* BlockedUser+Convienece.swift */; };
 		5FE050A31FDE370F004DF1BD /* BlockedUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050A21FDE370F004DF1BD /* BlockedUserController.swift */; };
+		5FE050A51FDF6FAE004DF1BD /* BlockedUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050A41FDF6FAE004DF1BD /* BlockedUserTableViewCell.swift */; };
 		5FF57B201FA0E7E2009AF2C1 /* RideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF57B1F1FA0E7E2009AF2C1 /* RideTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		5FE0509E1FDE1970004DF1BD /* BlockedUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserTableViewController.swift; sourceTree = "<group>"; };
 		5FE050A01FDE36D6004DF1BD /* BlockedUser+Convienece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockedUser+Convienece.swift"; sourceTree = "<group>"; };
 		5FE050A21FDE370F004DF1BD /* BlockedUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserController.swift; sourceTree = "<group>"; };
+		5FE050A41FDF6FAE004DF1BD /* BlockedUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserTableViewCell.swift; sourceTree = "<group>"; };
 		5FF57B1F1FA0E7E2009AF2C1 /* RideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				5FF57B1F1FA0E7E2009AF2C1 /* RideTableViewCell.swift */,
+				5FE050A41FDF6FAE004DF1BD /* BlockedUserTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				5FBF06731F9E9C7B0055B53C /* LaunchScreenCopyViewController.swift in Sources */,
 				5FBF066F1F9E8C9D0055B53C /* InitialViewController.swift in Sources */,
 				5FE0509F1FDE1970004DF1BD /* BlockedUserTableViewController.swift in Sources */,
+				5FE050A51FDF6FAE004DF1BD /* BlockedUserTableViewCell.swift in Sources */,
 				5F1FC3B51FD8F75E0000AE10 /* ExtensionHelpers.swift in Sources */,
 				5FF57B201FA0E7E2009AF2C1 /* RideTableViewCell.swift in Sources */,
 			);

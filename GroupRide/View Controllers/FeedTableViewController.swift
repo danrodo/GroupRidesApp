@@ -140,12 +140,21 @@ class FeedTableViewController: UITableViewController, CLLocationManagerDelegate 
         var filteredRides: [RideEvent] = []
         
         if blockedUsers.count == 0 {
-            filteredRides = upToDateRides
+            for rideEvent in upToDateRides {
+                guard let eventBlockedUsers = rideEvent.blockedUsersArray else { return 0 }
+                if !eventBlockedUsers.contains((UserController.shared.currentUser?.recordIDString)!) {
+                    filteredRides.append(rideEvent)
+                }
+            }
+ 
         } else {
             for rideEvent in upToDateRides {
+                guard let eventBlockedUsers = rideEvent.blockedUsersArray else { return 0 }
                 for user in blockedUsers {
                     if rideEvent.userRef.recordID.recordName != user.userRecordIDString {
-                        filteredRides.append(rideEvent)
+                        if !eventBlockedUsers.contains((UserController.shared.currentUser?.recordIDString)!) {
+                            filteredRides.append(rideEvent)
+                        }
                     }
                 }
             }

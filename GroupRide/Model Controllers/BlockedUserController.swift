@@ -32,7 +32,6 @@ class BlockedUserController {
         } catch let error {
             print("Error loading from persistent store \(error)")
         }
-        
     }
     
     func blockUser(userRecordIDString: String) {
@@ -40,7 +39,6 @@ class BlockedUserController {
         let _ = BlockedUser(userRecordIDString: userRecordIDString, context: CoreDataStack.context)
         
         saveToPersistentStore()
-        
     }
     
     func unBlockUser(blockedUser: BlockedUser) {
