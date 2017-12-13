@@ -38,9 +38,11 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate, UIT
             RideEventController.shared.create(location: location, date: date, description: description) { (error) in
                 if let error = error {
                     NSLog("error saving ride event to store \(error.localizedDescription)")
+                    self.postRideButton.isEnabled = true
                     return
                 }
                 DispatchQueue.main.async {
+                    self.postRideButton.isEnabled = true
                     self.tabBarController?.selectedIndex = 0
                 }
                 

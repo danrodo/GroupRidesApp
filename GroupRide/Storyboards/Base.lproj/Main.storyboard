@@ -77,7 +77,7 @@
             </objects>
             <point key="canvasLocation" x="-1650" y="1397"/>
         </scene>
-        <!--Feed Table View Controller-->
+        <!--Feed-->
         <scene sceneID="Iql-Ji-45R">
             <objects>
                 <tableViewController id="zXg-tD-DPq" customClass="FeedTableViewController" customModule="GroupRide" customModuleProvider="target" sceneMemberID="viewController">
@@ -104,9 +104,9 @@
                             <outlet property="delegate" destination="zXg-tD-DPq" id="6ht-dg-rvX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="och-lH-ygk">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="settingsIcon" id="LSe-Ub-2SF">
-                            <color key="tintColor" red="0.0024882087019999998" green="0.56642240290000001" blue="0.0026179158590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <navigationItem key="navigationItem" title="Feed" id="och-lH-ygk">
+                        <barButtonItem key="rightBarButtonItem" title="Profile" id="LSe-Ub-2SF">
+                            <color key="tintColor" red="0.28181922440000001" green="0.27472046020000002" blue="0.43220216039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="smP-10-4mz" kind="show" identifier="feedToProfileSegue" id="SHa-hv-dqL"/>
                             </connections>
@@ -503,7 +503,7 @@
             </objects>
             <point key="canvasLocation" x="3242" y="-1427"/>
         </scene>
-        <!--New Ride Event View Controller-->
+        <!--Create Ride-->
         <scene sceneID="84B-4Z-a9D">
             <objects>
                 <tableViewController id="YvS-qy-i5e" customClass="NewRideEventViewController" customModule="GroupRide" customModuleProvider="target" sceneMemberID="viewController">
@@ -616,7 +616,7 @@
                             <outlet property="delegate" destination="YvS-qy-i5e" id="gST-eJ-FFL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Xvz-um-mJn"/>
+                    <navigationItem key="navigationItem" title="Create Ride" id="Xvz-um-mJn"/>
                     <connections>
                         <outlet property="datePicker" destination="nZL-iy-VFn" id="tWy-XX-98v"/>
                         <outlet property="descriptionTextArea" destination="fhw-RO-tIm" id="EUA-ug-B0F"/>
@@ -781,9 +781,7 @@
         <scene sceneID="Ajj-mR-mux">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ICW-Ta-Q3P" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" id="kni-0v-o9x">
-                        <color key="badgeColor" red="0.0024882087019999998" green="0.56642240290000001" blue="0.0026179158590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Feed" image="feedIcon" id="kni-0v-o9x"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J6T-CS-FUM">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -804,8 +802,11 @@
                 <tabBarController storyboardIdentifier="FeedTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="DzX-2I-I43" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Xu-kX-SqX">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.28181922440000001" green="0.27472046020000002" blue="0.43220216039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.28181922440000001" green="0.27472046020000002" blue="0.43220216039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="ICW-Ta-Q3P" kind="relationship" relationship="viewControllers" id="0Az-V4-dyw"/>
@@ -820,9 +821,7 @@
         <scene sceneID="0rE-LJ-hIz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Ny-cr-47k" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Add Ride" id="knZ-ao-gQR">
-                        <color key="badgeColor" red="0.0024882087019999998" green="0.56642240290000001" blue="0.0026179158590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Add Ride" image="addIcon" id="knZ-ao-gQR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O6y-DM-Sx2">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -839,11 +838,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="addIcon" width="25" height="25"/>
         <image name="bike_icon_white" width="74" height="43"/>
+        <image name="feedIcon" width="25" height="25"/>
         <image name="infoIcon" width="25" height="25"/>
-        <image name="settingsIcon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="54M-H3-4Zj"/>
+        <segue reference="SHa-hv-dqL"/>
     </inferredMetricsTieBreakers>
 </document>
