@@ -38,6 +38,7 @@ struct RideEventKeys {
     static let descriptionKey = "description"
     static let recordTypeKey = "RideEvent"
     static let userRefKey = "userRef"
+    static let blockedUsersKey = "blockedUsers"
     
     // MARK: - Notification
     

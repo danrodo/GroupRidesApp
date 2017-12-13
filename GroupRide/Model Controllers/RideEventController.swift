@@ -36,8 +36,9 @@ class RideEventController {
         guard var currentUser = UserController.shared.currentUser, let cloudKitRecordID = currentUser.cloudKitRecordID else { return }
         let userRef = CKReference(recordID: cloudKitRecordID, action: .deleteSelf)
         
+        let blockedUsers = BlockedUserController.shared.fetchBlockedUsers()
         
-        let rideEvent = RideEvent(location: location, date: date, description: description, userRef: userRef)
+        let rideEvent = RideEvent(location: location, date: date, description: description, userRef: userRef, blockedUsers: blockedUsers)
         let record = CKRecord(rideEvent: rideEvent)
         
         let rideRef = CKReference(record: record, action: .none)
@@ -79,7 +80,7 @@ class RideEventController {
             guard let records = records else { return }
             self.rideList = records.flatMap({ RideEvent(cloudKitRecord: $0) })
         }
-    }
+    }    
 }
 
 

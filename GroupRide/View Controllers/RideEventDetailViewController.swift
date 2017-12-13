@@ -22,6 +22,8 @@ class RideEventDetailViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    
+    @IBOutlet weak var leaveRideButton: UIButton!
     @IBOutlet weak var joinRideButton: UIButton!
     
     
@@ -49,12 +51,25 @@ class RideEventDetailViewController: UIViewController {
             } else {
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
-                    self.joinRideButton.isEnabled = true
                 }
             }
         }
     }
-
+    
+    @IBAction func leaveRideButtonTapped(_ sender: UIButton) {
+        
+        guard let rideEvent = rideEvent else { return }
+        UserController.shared.leave(rideEvent: rideEvent) { (success) in
+            if !success {
+                NSLog("Error leaving ride event")
+                return
+            }
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -80,13 +95,21 @@ class RideEventDetailViewController: UIViewController {
         
         if let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first  {
             DispatchQueue.main.async {
+                // User is already attending ride
+                self.joinRideButton.isHidden = true
                 self.joinRideButton.isEnabled = false
-                self.joinRideButton.backgroundColor = UIColor.red
+                
+                self.leaveRideButton.isHidden = false
+                self.leaveRideButton.isEnabled = true
             }
         } else {
             DispatchQueue.main.async {
-                // turn on join ride button
+                // User is not attending ride
+                self.joinRideButton.isHidden = false
                 self.joinRideButton.isEnabled = true
+                
+                self.leaveRideButton.isHidden = true
+                self.leaveRideButton.isEnabled = false 
             }
         }
         
@@ -95,6 +118,9 @@ class RideEventDetailViewController: UIViewController {
         guard let user = users[userRef.recordID] else { return }
         
         profilePictureImageView.image = user.photo
+        profilePictureImageView.layer.cornerRadius = 10
+        profilePictureImageView.layer.masksToBounds = true
+        
         firstNameLabel.text = user.firstName
         lastNameLabel.text = user.lastName
         locationLabel.text = rideEvent.location

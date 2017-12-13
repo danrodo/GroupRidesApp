@@ -88,8 +88,6 @@ class UserController {
     
     func fetchUsersAttending(rideEvent: RideEvent, completion: @escaping (_ attendingUsers: [User]?, _ success: Bool) -> Void = { _, _ in }) {
         
-        
-        
         guard let rideEventRecordID = rideEvent.cloudKitRecordID else { return }
         
         let predicate = NSPredicate(format: "%K CONTAINS %@", UserKeys.attendingRidesKey, rideEventRecordID)
@@ -114,11 +112,9 @@ class UserController {
     
     func join(rideEvent: RideEvent, completion: @escaping ((_ success: Bool) -> Void) = { _ in }) {
         
-        guard var currentUser = UserController.shared.currentUser else { return }
         let rideRecord = CKRecord(rideEvent: rideEvent)
         
         let rideReference = CKReference(record: rideRecord, action: .none)
-//        currentUser.attendingRides.append(rideReference)
         UserController.shared.currentUser?.attendingRides.append(rideReference)
         let userRecord = CKRecord(user: UserController.shared.currentUser!)
         
@@ -129,6 +125,23 @@ class UserController {
             }
             completion(true)
         }
+    }
+    
+    func leave(rideEvent: RideEvent, completion: @escaping ((_ success: Bool) -> Void) = { _ in }) {
+        
+        guard let updatedAttendingRides = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID != rideEvent.cloudKitRecordID }) else { return }
+        
+        UserController.shared.currentUser?.attendingRides = updatedAttendingRides
+        let updatedUserRecord = CKRecord(user: UserController.shared.currentUser!)
+        
+        cloudKitManager.modifyRecords([updatedUserRecord], perRecordCompletion: nil) { (_, error) in
+            if let error = error {
+                NSLog("Error leaving ride event \(error.localizedDescription)")
+                return completion(false)
+            }
+            completion(true)
+        }
+        
     }
 }
 

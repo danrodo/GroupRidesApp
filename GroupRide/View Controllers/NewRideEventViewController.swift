@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewRideEventViewController: UITableViewController, UITextViewDelegate {
+class NewRideEventViewController: UITableViewController, UITextViewDelegate, UITabBarControllerDelegate {
     
     var location = ""
     
@@ -41,7 +41,7 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate {
                     return
                 }
                 DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
+                    self.tabBarController?.selectedIndex = 0
                 }
                 
             }
@@ -55,6 +55,7 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.delegate = self
         
         postRideButton.isEnabled = true
         
