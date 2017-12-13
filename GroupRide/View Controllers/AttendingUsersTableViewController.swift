@@ -56,7 +56,8 @@ class AttendingUsersTableViewController: UITableViewController {
         guard let tempUsers = users else { return UITableViewCell() }
         let user = tempUsers[indexPath.row]
         
-        cell.imageView?.image = user.photo
+        cell.imageView?.image = ImageHelper.shared.flipImage(image: user.photo ?? UIImage())
+
         cell.textLabel?.text = "\(user.firstName) \(user.lastName)"
 
         return cell

@@ -43,6 +43,9 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate, UIT
                 }
                 DispatchQueue.main.async {
                     self.postRideButton.isEnabled = true
+                    self.datePicker.date = currentDate
+                    self.locationTextField.text = ""
+                    self.descriptionTextArea.text = "Enter description here..."
                     self.tabBarController?.selectedIndex = 0
                 }
                 

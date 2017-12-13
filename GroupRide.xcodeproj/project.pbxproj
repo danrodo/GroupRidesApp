@@ -39,6 +39,7 @@
 		5FE050A71FDF8A8B004DF1BD /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050A61FDF8A8B004DF1BD /* DateHelper.swift */; };
 		5FE050A91FDF8AD2004DF1BD /* ScheduledRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050A81FDF8AD2004DF1BD /* ScheduledRide.swift */; };
 		5FE050AB1FDF8B4C004DF1BD /* ScheduledRideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050AA1FDF8B4C004DF1BD /* ScheduledRideController.swift */; };
+		5FE050AF1FE1EEA1004DF1BD /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE050AE1FE1EEA1004DF1BD /* ImageHelper.swift */; };
 		5FF57B201FA0E7E2009AF2C1 /* RideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF57B1F1FA0E7E2009AF2C1 /* RideTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		5FE050A61FDF8A8B004DF1BD /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		5FE050A81FDF8AD2004DF1BD /* ScheduledRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledRide.swift; sourceTree = "<group>"; };
 		5FE050AA1FDF8B4C004DF1BD /* ScheduledRideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledRideController.swift; sourceTree = "<group>"; };
+		5FE050AE1FE1EEA1004DF1BD /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		5FF57B1F1FA0E7E2009AF2C1 /* RideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,6 +213,7 @@
 				5FBF06681F9E4DAC0055B53C /* CloudKitManager.swift */,
 				5FE050931FDE0DAE004DF1BD /* CoreDataStack.swift */,
 				5FE050A61FDF8A8B004DF1BD /* DateHelper.swift */,
+				5FE050AE1FE1EEA1004DF1BD /* ImageHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				5FBF066F1F9E8C9D0055B53C /* InitialViewController.swift in Sources */,
 				5FE050A71FDF8A8B004DF1BD /* DateHelper.swift in Sources */,
 				5FE0509F1FDE1970004DF1BD /* BlockedUserTableViewController.swift in Sources */,
+				5FE050AF1FE1EEA1004DF1BD /* ImageHelper.swift in Sources */,
 				5FE050A51FDF6FAE004DF1BD /* BlockedUserTableViewCell.swift in Sources */,
 				5F1FC3B51FD8F75E0000AE10 /* ExtensionHelpers.swift in Sources */,
 				5FF57B201FA0E7E2009AF2C1 /* RideTableViewCell.swift in Sources */,

@@ -75,7 +75,9 @@ class RideTableViewCell: UITableViewCell {
         self.addSubview(self.profileImageView)
         //
         DispatchQueue.main.async {
-            self.profileImageView.image = user.photo
+//            self.profileImageView.image = user.photo
+            self.profileImageView.image = ImageHelper.shared.flipImage(image: user.photo ?? UIImage())
+
             
             self.addConstraintsWithFormat(format: "H:|-12-[v0(68)]", views: self.profileImageView)
             self.addConstraintsWithFormat(format: "V:|-12-[v0(68)]", views: self.profileImageView)

@@ -11,8 +11,7 @@ import MessageUI
 
 class UserProfileViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    var user: User? = nil
-    
+    var user: User?
     
     var location: String?
     
@@ -32,7 +31,6 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
         BlockedUserController.shared.blockUser(userRecordIDString: user.recordIDString)
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,9 +55,11 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
         self.lastNameLabel.text = user?.lastName
         self.locationLabel.text = self.location
         
-        profilePictureImageView.image = user?.photo
+//        profilePictureImageView.image = user?.photo
         profilePictureImageView.layer.cornerRadius = 15.0
         profilePictureImageView.layer.masksToBounds = true
+        
+        profilePictureImageView.image = ImageHelper.shared.flipImage(image: user?.photo ?? UIImage())
     }
     
     func configureMailController() -> MFMailComposeViewController {

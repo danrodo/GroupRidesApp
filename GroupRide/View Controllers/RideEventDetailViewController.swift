@@ -93,7 +93,7 @@ class RideEventDetailViewController: UIViewController {
         
         guard let rideEvent = rideEvent else { return }
         
-        if let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first  {
+        if let _ = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first  {
             DispatchQueue.main.async {
                 // User is already attending ride
                 self.joinRideButton.isHidden = true
@@ -117,7 +117,9 @@ class RideEventDetailViewController: UIViewController {
         let users = RideEventController.shared.userDict
         guard let user = users[userRef.recordID] else { return }
         
-        profilePictureImageView.image = user.photo
+//        profilePictureImageView.image = user.photo
+        profilePictureImageView.image = ImageHelper.shared.flipImage(image: user.photo ?? UIImage())
+
         profilePictureImageView.layer.cornerRadius = 10
         profilePictureImageView.layer.masksToBounds = true
         

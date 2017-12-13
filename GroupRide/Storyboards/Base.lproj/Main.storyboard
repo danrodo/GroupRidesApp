@@ -20,13 +20,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Ride" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6b-bj-HXH">
-                                <rect key="frame" x="113" y="237" width="149" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Rides" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6b-bj-HXH">
+                                <rect key="frame" x="38" y="237" width="300" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                 <color key="textColor" red="0.98812824489999995" green="0.98829704519999995" blue="0.98811751599999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="0.98812824487686157" green="0.98829704523086548" blue="0.988117516040802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to group ride, click the button below to get started setting up your profile!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6a-lt-Ujy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to group rides, click the button below to get started setting up your profile!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6a-lt-Ujy">
                                 <rect key="frame" x="16" y="282" width="343" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="83" id="pRZ-mt-Imh"/>
@@ -59,14 +59,14 @@
                         <constraints>
                             <constraint firstItem="qbQ-w3-dKN" firstAttribute="trailing" secondItem="a6a-lt-Ujy" secondAttribute="trailing" constant="16" id="8yA-ql-al7"/>
                             <constraint firstItem="hVG-0R-4fC" firstAttribute="leading" secondItem="qbQ-w3-dKN" secondAttribute="leading" constant="16" id="FLi-nt-Dv9"/>
-                            <constraint firstItem="G6b-bj-HXH" firstAttribute="leading" secondItem="qbQ-w3-dKN" secondAttribute="leading" constant="113" id="ITL-UU-NTM"/>
                             <constraint firstItem="BDr-6F-uN6" firstAttribute="centerX" secondItem="uSz-pm-fkB" secondAttribute="centerX" id="TLL-7u-71T"/>
                             <constraint firstItem="a6a-lt-Ujy" firstAttribute="leading" secondItem="uSz-pm-fkB" secondAttribute="leading" constant="16" id="Wb5-Qt-hKD"/>
                             <constraint firstItem="BDr-6F-uN6" firstAttribute="top" secondItem="qbQ-w3-dKN" secondAttribute="top" constant="50" id="cpc-7t-ooZ"/>
                             <constraint firstItem="a6a-lt-Ujy" firstAttribute="top" secondItem="G6b-bj-HXH" secondAttribute="bottom" constant="10" id="e4s-rj-1Qz"/>
                             <constraint firstItem="G6b-bj-HXH" firstAttribute="top" secondItem="BDr-6F-uN6" secondAttribute="bottom" constant="63" id="eil-oy-Gjb"/>
+                            <constraint firstItem="G6b-bj-HXH" firstAttribute="centerX" secondItem="qbQ-w3-dKN" secondAttribute="centerX" id="ekY-rA-e5p"/>
                             <constraint firstItem="qbQ-w3-dKN" firstAttribute="trailing" secondItem="hVG-0R-4fC" secondAttribute="trailing" constant="16" id="gML-qU-FAs"/>
-                            <constraint firstItem="qbQ-w3-dKN" firstAttribute="trailing" secondItem="G6b-bj-HXH" secondAttribute="trailing" constant="113" id="sZU-13-S2d"/>
+                            <constraint firstItem="G6b-bj-HXH" firstAttribute="width" secondItem="uSz-pm-fkB" secondAttribute="width" multiplier="4/5" id="tmw-EY-2TJ"/>
                             <constraint firstItem="hVG-0R-4fC" firstAttribute="top" secondItem="a6a-lt-Ujy" secondAttribute="bottom" constant="132" id="urv-3d-Ygm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qbQ-w3-dKN"/>
@@ -296,7 +296,7 @@
                                 <color key="textColor" red="0.98812824489999995" green="0.98829704519999995" blue="0.98811751599999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Hg-xB-erl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Hg-xB-erl">
                                 <rect key="frame" x="16" y="80" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4Hg-xB-erl" secondAttribute="height" multiplier="1:1" id="Ka2-DG-uZv"/>
@@ -639,7 +639,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfi-iy-943">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rUz-ic-JN9">
+                                    <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rUz-ic-JN9">
                                         <rect key="frame" x="62" y="30" width="250" height="190"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -844,6 +844,6 @@
         <image name="infoIcon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SHa-hv-dqL"/>
+        <segue reference="54M-H3-4Zj"/>
     </inferredMetricsTieBreakers>
 </document>
