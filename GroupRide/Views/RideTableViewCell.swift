@@ -135,6 +135,9 @@ class RideTableViewCell: UITableViewCell {
                 containerView.addSubview(self.isAttendingImageView)
                 containerView.addSubview(self.attendingLabel)
                 
+                self.attendingLabel.isHidden = false
+                self.isAttendingImageView.isHidden = false
+                
                 containerView.addConstraintsWithFormat(format: "H:|[v0][v1(110)]-12-|", views: self.nameLabel, self.dateLabel)
                 containerView.addConstraintsWithFormat(format: "V:|[v0][v1(24)]|", views: self.nameLabel, self.locationLabel)
                 
@@ -148,6 +151,8 @@ class RideTableViewCell: UITableViewCell {
         
         } else {
             DispatchQueue.main.async {
+                self.attendingLabel.isHidden = true
+                self.isAttendingImageView.isHidden = true
                 containerView.addConstraintsWithFormat(format: "H:|[v0][v1(110)]-12-|", views: self.nameLabel, self.dateLabel)
                 containerView.addConstraintsWithFormat(format: "V:|[v0][v1(24)]|", views: self.nameLabel, self.locationLabel)
                 

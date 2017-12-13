@@ -126,6 +126,23 @@ class UserController {
             completion(true)
         }
     }
+    
+    func leave(rideEvent: RideEvent, completion: @escaping ((_ success: Bool) -> Void) = { _ in }) {
+        
+        guard let updatedAttendingRides = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID != rideEvent.cloudKitRecordID }) else { return }
+        
+        UserController.shared.currentUser?.attendingRides = updatedAttendingRides
+        let updatedUserRecord = CKRecord(user: UserController.shared.currentUser!)
+        
+        cloudKitManager.modifyRecords([updatedUserRecord], perRecordCompletion: nil) { (_, error) in
+            if let error = error {
+                NSLog("Error leaving ride event \(error.localizedDescription)")
+                return completion(false)
+            }
+            completion(true)
+        }
+        
+    }
 }
 
 
