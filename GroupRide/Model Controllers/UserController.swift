@@ -123,6 +123,7 @@ class UserController {
                 NSLog("error joining ride when creating it, from ride even controller \(error.localizedDescription)")
                 return completion(false)
             }
+            LocalNotifScheduler.shared.scheduleNotification(event: rideEvent)
             completion(true)
         }
     }
@@ -139,6 +140,7 @@ class UserController {
                 NSLog("Error leaving ride event \(error.localizedDescription)")
                 return completion(false)
             }
+            LocalNotifScheduler.shared.cancelLocalNotifications(for: rideEvent)
             completion(true)
         }
         
