@@ -56,6 +56,10 @@ class AttendingUsersTableViewController: UITableViewController {
         guard let tempUsers = users else { return UITableViewCell() }
         let user = tempUsers[indexPath.row]
         
+//        cell.imageView?.layer.cornerRadius = 45.0
+//        cell.imageView?.layer.masksToBounds = true
+//        cell.imageView?.contentMode = .scaleAspectFill
+        
         cell.imageView?.image = user.photo
 
         cell.textLabel?.text = "\(user.firstName) \(user.lastName)"

@@ -30,13 +30,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>10</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow app to user camera to capture profile picture!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow this app to use your current location</string>
+	<string>Allow group rides to use your current location to make ride creation easier!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Select photo from library to use as your profile picture!</string>
 	<key>UILaunchStoryboardName</key>
@@ -50,8 +50,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
