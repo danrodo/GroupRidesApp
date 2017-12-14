@@ -11,8 +11,7 @@ import MessageUI
 
 class UserProfileViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    var user: User? = nil
-    
+    var user: User?
     
     var location: String?
     
@@ -29,10 +28,12 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
         blockUserButton.isEnabled = false
         guard let user = user else { return }
         print("BLOCKING USER \(user.firstName) \(user.lastName)")
-        BlockedUserController.shared.blockUser(userRecordIDString: user.recordIDString)
-        self.navigationController?.popToRootViewController(animated: true)
+        
+        let title = "Are you sure?"
+        let message = "You will wont be able to see any rides \(user.firstName) posts if you block them. But if you change your mind, you can always unblock them from your profile"
+        
+        presentAlertWith(title: title, message: message)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,23 +61,32 @@ class UserProfileViewController: UIViewController, MFMailComposeViewControllerDe
         profilePictureImageView.image = user?.photo
         profilePictureImageView.layer.cornerRadius = 15.0
         profilePictureImageView.layer.masksToBounds = true
+        
+//        profilePictureImageView.image = ImageHelper.shared.flipImage(image: user?.photo ?? UIImage())
     }
     
-    func configureMailController() -> MFMailComposeViewController {
-        if let user = user {
-            let mailComposerVC = MFMailComposeViewController()
-            mailComposerVC.mailComposeDelegate = self
-            mailComposerVC.setToRecipients(["groupridesapp@gmail.com"])
-            let name = "\(user.firstName) \(user.lastName)"
-            mailComposerVC.setSubject("\(String(describing: name)) is reporting a user for inapropriate conduct")
-            
-            return mailComposerVC
+    func presentAlertWith(title: String, message: String, color: UIColor = UIColor.white) {
+        
+        guard let user = user else { return }
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let subview = alertController.view.subviews.first! as UIView
+        let alertContentView = subview.subviews.first! as UIView
+        alertContentView.backgroundColor = color
+        alertContentView.layer.cornerRadius = 10.0
+        
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        let continueAction = UIAlertAction(title: "Continue", style: .default) { (action) in
+            BlockedUserController.shared.blockUser(userRecordIDString: user.recordIDString)
+            self.navigationController?.popToRootViewController(animated: true)
         }
-        return MFMailComposeViewController()
-    }
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(continueAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
 
 }

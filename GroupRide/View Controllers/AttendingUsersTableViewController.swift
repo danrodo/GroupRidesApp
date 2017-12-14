@@ -57,6 +57,7 @@ class AttendingUsersTableViewController: UITableViewController {
         let user = tempUsers[indexPath.row]
         
         cell.imageView?.image = user.photo
+
         cell.textLabel?.text = "\(user.firstName) \(user.lastName)"
 
         return cell

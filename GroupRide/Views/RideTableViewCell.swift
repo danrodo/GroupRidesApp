@@ -76,6 +76,8 @@ class RideTableViewCell: UITableViewCell {
         //
         DispatchQueue.main.async {
             self.profileImageView.image = user.photo
+//            self.profileImageView.image = ImageHelper.shared.flipImage(image: user.photo ?? UIImage())
+
             
             self.addConstraintsWithFormat(format: "H:|-12-[v0(68)]", views: self.profileImageView)
             self.addConstraintsWithFormat(format: "V:|-12-[v0(68)]", views: self.profileImageView)
@@ -85,7 +87,7 @@ class RideTableViewCell: UITableViewCell {
     
         var isAttending = false
         
-        guard let attendingRideList = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first else {
+        guard let _ = UserController.shared.currentUser?.attendingRides.filter({ $0.recordID == rideEvent.cloudKitRecordID }).first else {
             isAttending = false
             DispatchQueue.main.async {
                 self.setUpContainerView(user: user, date: date.description, location: location, isAttending: isAttending)

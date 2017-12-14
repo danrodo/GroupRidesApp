@@ -11,9 +11,11 @@ import CloudKit
 
 class NewUserViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var keyboardHeight: CGFloat = 0
-    var imageViewHeight: CGFloat = 0
-    var textFieldsSpacing: CGFloat = 0.0
+    var keyboardHeight: CGFloat? = 0
+    var imageViewHeight: CGFloat? = 0
+    var textFieldsSpacing: CGFloat? = 0
+    
+    var heightWasSet = false
     
     // MARK: - Properties
     
@@ -41,6 +43,11 @@ class NewUserViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         super.viewDidLoad()
         
         setUpView()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
 
     }
     
@@ -186,32 +193,39 @@ class NewUserViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     // FIXME: - implement
     
     @objc func keyboardWillShow(_ notification: Notification) {
+        
         guard let userInfo = notification.userInfo,
             let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
             let animationCurveRaw = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int,
             let animationCurve = UIViewAnimationCurve(rawValue: animationCurveRaw),
             let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
-        if keyboardSize.height != 0 {
+        if keyboardSize.height != 0 && !(keyboardSize.height < keyboardHeight!) {
             self.keyboardHeight = keyboardSize.height
         }
         
-        self.view.layoutIfNeeded()
-        self.viewToBottomConstraint.constant += self.keyboardHeight
-        
-        self.imageViewToTopConstraint.constant -= self.imageViewHeight
-        
-        UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration(animationDuration)
-        UIView.setAnimationCurve(animationCurve)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        
-        self.view.layoutIfNeeded()
-        UIView.commitAnimations()
+        if !heightWasSet {
+            heightWasSet = true
+            
+            self.view.layoutIfNeeded()
+            self.viewToBottomConstraint.constant += self.keyboardHeight!
+            self.imageViewToTopConstraint.constant -= self.imageViewHeight!
+            
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(animationDuration)
+            UIView.setAnimationCurve(animationCurve)
+            UIView.setAnimationBeginsFromCurrentState(true)
+            
+            self.view.layoutIfNeeded()
+            UIView.commitAnimations()
+        }
         
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
+        
+        heightWasSet = false
+        
         guard let userInfo = notification.userInfo,
             let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
             let animationCurveRaw = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int,

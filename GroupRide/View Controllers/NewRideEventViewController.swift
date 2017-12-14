@@ -43,6 +43,9 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate, UIT
                 }
                 DispatchQueue.main.async {
                     self.postRideButton.isEnabled = true
+                    self.datePicker.date = currentDate
+                    self.locationTextField.text = ""
+                    self.descriptionTextArea.text = "Enter description here..."
                     self.tabBarController?.selectedIndex = 0
                 }
                 
@@ -50,6 +53,10 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate, UIT
         } else {
             // Present alert here to tell user not to make a event with the current date or sooner
             postRideButton.isEnabled = true
+            let title = "Cannot save this ride!"
+            let message = "Make sure the date is right, and fill in the description and location."
+            
+            presentAlertWith(title: title, message: message)
         }
     }
     
@@ -94,6 +101,23 @@ class NewRideEventViewController: UITableViewController, UITextViewDelegate, UIT
         if textView.text == "" {
             textView.text = "Enter description here..."
         }
+    }
+    
+    func presentAlertWith(title: String, message: String, color: UIColor = UIColor.white) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let subview = alertController.view.subviews.first! as UIView
+        let alertContentView = subview.subviews.first! as UIView
+        alertContentView.backgroundColor = color
+        alertContentView.layer.cornerRadius = 10.0
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
 }
 
