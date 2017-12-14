@@ -117,8 +117,8 @@ class RideEventDetailViewController: UIViewController {
         let users = RideEventController.shared.userDict
         guard let user = users[userRef.recordID] else { return }
         
-//        profilePictureImageView.image = user.photo
-        profilePictureImageView.image = ImageHelper.shared.flipImage(image: user.photo ?? UIImage())
+        profilePictureImageView.image = user.photo
+//        profilePictureImageView.image = ImageHelper.shared.flipImage(image: user.photo ?? UIImage())
 
         profilePictureImageView.layer.cornerRadius = 10
         profilePictureImageView.layer.masksToBounds = true

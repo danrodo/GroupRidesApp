@@ -31,8 +31,8 @@ class BlockedUserTableViewCell: UITableViewCell {
         profilePictureImageView.layer.cornerRadius = 34
         profilePictureImageView.layer.masksToBounds = true
 
-//        profilePictureImageView.image = user.photo
-        profilePictureImageView.image = ImageHelper.shared.flipImage(image: user.photo ?? UIImage())
+        profilePictureImageView.image = user.photo
+//        profilePictureImageView.image = ImageHelper.shared.flipImage(image: user.photo ?? UIImage())
 
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         
